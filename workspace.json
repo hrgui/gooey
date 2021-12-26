@@ -1,0 +1,7 @@
+{
+  "version": 2,
+  "projects": {
+    "gooey": "apps/gooey",
+    "gooey-e2e": "apps/gooey-e2e"
+  }
+}
