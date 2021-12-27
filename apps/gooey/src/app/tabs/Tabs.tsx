@@ -1,29 +1,19 @@
 import React, { Children } from "react";
-import classNames from "classnames";
 
 // Inspiration
 // https://github.com/mui-org/material-ui/blob/master/packages/mui-material/src/Tabs/Tabs.js
+export interface TabsProps {
+  children?: React.ReactNode;
+  value?: string | number;
+  onChange?: (event: React.MouseEvent<HTMLButtonElement>, idx: string | number) => void;
+}
 
-export const Tab = React.forwardRef((props, ref) => {
-  const { label, active, onClick } = props;
-
-  return (
-    <button
-      ref={ref}
-      className={classNames("p-[16px]", { "text-blue-500": active })}
-      onClick={onClick}
-    >
-      {label}
-    </button>
-  );
-});
-
-export function Tabs({ children: _children, value, onChange }) {
-  const tabsRef = React.useRef(null);
-  const tabRef = React.useRef(null);
+export function Tabs({ children: _children, value, onChange }: TabsProps) {
+  const tabsRef = React.useRef<HTMLDivElement>(null);
+  const tabRef = React.useRef<HTMLButtonElement>(null);
   const [indicatorPos, setIndicatorPos] = React.useState([0, 0]);
 
-  function updateIndicatorStyle({ width, left }, tabsRef: HTMLDivElement) {
+  function updateIndicatorStyle({ width, left }: DOMRect, tabsRef: HTMLDivElement) {
     const pos = left - tabsRef.getBoundingClientRect().left;
     setIndicatorPos([pos, width]);
   }
@@ -45,9 +35,9 @@ export function Tabs({ children: _children, value, onChange }) {
           {Children.map(_children, (child, idx) => {
             const active = value === idx;
             const ref = active ? tabRef : undefined;
-            return React.cloneElement(child, {
-              onClick: (e) => {
-                onChange(e, idx);
+            return React.cloneElement(child as React.ReactElement, {
+              onClick: (e: React.MouseEvent<HTMLButtonElement>) => {
+                onChange?.(e, idx);
               },
               ref,
               active,
@@ -61,12 +51,4 @@ export function Tabs({ children: _children, value, onChange }) {
       </div>
     </div>
   );
-}
-
-export function TabPanel({ value, index, children }) {
-  if (value !== index) {
-    return null;
-  }
-
-  return <div className="p-[16px]">{children}</div>;
 }

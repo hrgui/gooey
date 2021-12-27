@@ -1,12 +1,12 @@
 import React from "react";
 import { Story, Meta } from "@storybook/react";
-import { Tabs, TabPanel, Tab } from "./Tabs";
+import { Tabs, TabPanel, Tab } from "./index";
 const meta: Meta = { title: "Tabs", component: Tabs };
 
 export const Demo = () => {
-  const [value, setValue] = React.useState(0);
+  const [value, setValue] = React.useState<string | number>(0);
 
-  const handleChange = (event, newValue) => {
+  const handleChange = (event: React.MouseEvent, newValue: string | number) => {
     setValue(newValue);
   };
 
