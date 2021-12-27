@@ -4,7 +4,7 @@ import * as ReactDOM from "react-dom";
 
 ReactDOM.render(
   <StrictMode>
-    <App />
+    <div>TODO</div>
   </StrictMode>,
   document.getElementById("root")
 );
