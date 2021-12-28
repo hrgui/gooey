@@ -5,3 +5,7 @@
 .switch-checked {
   transform: translateX(20px);
 }
+
+.text-end {
+  text-align: end;
+}
