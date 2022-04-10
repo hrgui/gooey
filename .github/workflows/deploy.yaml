@@ -28,7 +28,7 @@ jobs:
         uses: bahmutov/npm-install@v1
 
       - name: ⚙️ Build
-        run: yarn build && touch app/storybook/storybook-static/.nojekyll
+        run: yarn build && touch apps/storybook/storybook-static/.nojekyll
 
       - name: 🚀 Deploy
         if: success()
