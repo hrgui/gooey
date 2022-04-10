@@ -1,0 +1,11 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+.switch-checked {
+  transform: translateX(20px);
+}
+
+.text-end {
+  text-align: end;
+}
