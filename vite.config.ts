@@ -1,15 +1,18 @@
+/// <reference types="vitest" />
+
 import { defineConfig } from "vite";
 import { resolve } from "path";
 import react from "@vitejs/plugin-react";
+import tsconfigPaths from "vite-tsconfig-paths";
 
 // https://vitejs.dev/config/
 export default defineConfig({
   build: {
     lib: {
       entry: resolve(__dirname, "src/index.ts"),
-      name: "MyLib",
+      name: "Gooey",
       formats: ["es", "umd"],
-      fileName: (format) => `my-lib.${format}.js`,
+      fileName: (format) => `gooey.${format}.js`,
     },
     rollupOptions: {
       // make sure to externalize deps that shouldn't be bundled
@@ -26,5 +29,13 @@ export default defineConfig({
       },
     },
   },
-  plugins: [react()],
+  plugins: [react(), tsconfigPaths()],
+  test: {
+    environment: "jsdom",
+    globals: true,
+    setupFiles: "./src/test/setup.tsx",
+    coverage: {
+      reporter: ["text", "text-summary", "html"],
+    },
+  },
 });
