@@ -9,7 +9,7 @@ on:
       - "package.json"
       - "vite.config.ts"
     branches:
-      - develop
+      - main
 jobs:
   build:
     runs-on: ubuntu-latest
