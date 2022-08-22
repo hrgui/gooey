@@ -1,7 +1,7 @@
 import React from "react";
-import { Story, Meta } from "@storybook/react";
+import { Story, Meta, ComponentMeta } from "@storybook/react";
 import { Tabs, TabPanel, Tab } from "./index";
-const meta: Meta = { title: "Tabs", component: Tabs };
+const meta: Meta = { title: "Tabs", component: Tabs } as ComponentMeta<typeof Tabs>;
 
 export const Demo = () => {
   const [value, setValue] = React.useState<string | number>(0);

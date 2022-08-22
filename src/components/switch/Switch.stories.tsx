@@ -1,6 +1,6 @@
 import React from "react";
 import { Story, Meta } from "@storybook/react";
-import { Switch } from "ui/switch/Switch";
+import { Switch } from "./Switch";
 const meta: Meta = { title: "Switch", component: Switch };
 
 const Demo: Story = (props) => <Switch {...props} />;
