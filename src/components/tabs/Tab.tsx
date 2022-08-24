@@ -7,18 +7,20 @@ export interface TabProps {
   onClick?: React.MouseEventHandler<HTMLButtonElement> | undefined;
 }
 
-export const Tab = React.forwardRef<HTMLButtonElement, TabProps>((props, ref) => {
-  const { label, active, onClick } = props;
+export const Tab = React.forwardRef<HTMLButtonElement, TabProps>(
+  (props, ref) => {
+    const { label, active, onClick } = props;
 
-  return (
-    <button
-      ref={ref}
-      className={classNames("p-[16px]", { "text-blue-500": active })}
-      onClick={onClick}
-    >
-      {label}
-    </button>
-  );
-});
+    return (
+      <button
+        ref={ref}
+        className={classNames("p-[16px]", { "text-blue-500 active": active })}
+        onClick={onClick}
+      >
+        {label}
+      </button>
+    );
+  }
+);
 
 export default Tab;

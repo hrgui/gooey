@@ -1,10 +1,18 @@
-import React from "react";
+import React, { useEffect } from "react";
 import { Story, Meta, ComponentMeta } from "@storybook/react";
 import { Tabs, TabPanel, Tab } from "./index";
-const meta: Meta = { title: "Tabs", component: Tabs } as ComponentMeta<typeof Tabs>;
+const meta: Meta = { title: "Tabs", component: Tabs } as ComponentMeta<
+  typeof Tabs
+>;
 
-export const Demo = () => {
-  const [value, setValue] = React.useState<string | number>(0);
+export const Default: Story = (args) => {
+  const [value, setValue] = React.useState<string | number>(+args.value || 0);
+
+  useEffect(() => {
+    if (args.value !== undefined) {
+      setValue(+args.value);
+    }
+  }, [args.value]);
 
   const handleChange = (event: React.MouseEvent, newValue: string | number) => {
     setValue(newValue);
@@ -28,6 +36,10 @@ export const Demo = () => {
       </TabPanel>
     </>
   );
+};
+
+Default.args = {
+  value: 0,
 };
 
 export default meta;
