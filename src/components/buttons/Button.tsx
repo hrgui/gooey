@@ -45,7 +45,7 @@ const variantClassNameMap = {
 };
 
 type Props = {
-  variant?: "default" | "danger" | "success" | "warning";
+  variant?: keyof typeof variantClassNameMap;
 } & React.DetailedHTMLProps<
   React.ButtonHTMLAttributes<HTMLButtonElement>,
   HTMLButtonElement
