@@ -9,13 +9,4 @@ Default.args = {
   checked: true,
 };
 
-export const All = () => {
-  return (
-    <>
-      <Switch />
-      <Switch checked />
-    </>
-  );
-};
-
 export default meta;
