@@ -62,7 +62,7 @@ const variantClassNameMap = {
   ),
 };
 
-type Props = {
+export type ButtonProps = {
   variant?: keyof typeof variantClassNameMap;
 } & React.DetailedHTMLProps<
   React.ButtonHTMLAttributes<HTMLButtonElement>,
@@ -74,8 +74,8 @@ export const Button = ({
   className: inputtedClassName,
   children,
   ...props
-}: Props) => {
-  function getVariantClassName(variant: Props["variant"]) {
+}: ButtonProps) => {
+  function getVariantClassName(variant: ButtonProps["variant"]) {
     return variantClassNameMap[variant!];
   }
 
