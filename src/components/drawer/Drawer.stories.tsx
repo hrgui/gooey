@@ -2,6 +2,7 @@ import React, { useState } from "react";
 import { Story, Meta } from "@storybook/react";
 import { Drawer } from "./Drawer";
 import { Button } from "../buttons";
+import Overlay from "../overlay/Overlay";
 const meta: Meta = { title: "Drawer", component: Drawer };
 
 const Demo: Story = (props) => {
@@ -10,11 +11,12 @@ const Demo: Story = (props) => {
   return (
     <>
       <div className="flex items-center justify-center">
-        <Button onClick={() => setDrawerOpen(!drawerOpen)}>
+        <Button className="z-[9001]" onClick={() => setDrawerOpen(!drawerOpen)}>
           Toggle Drawer State
         </Button>
       </div>
       <Drawer className="text-white" isOpen={drawerOpen} {...props} />
+      {drawerOpen && <Overlay />}
     </>
   );
 };
