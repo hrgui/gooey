@@ -15,13 +15,18 @@ export const Input = ({ className, type = "text", ...props }: Props) => {
       className={twMerge(
         ctl(`
         mt-1
-        block
-        rounded-md
+        ${isBoxInput ? "" : "block"}
+        ${isBoxInput ? "rounded" : "rounded-md"}
         ${isBoxInput ? "border-gray-300" : "border-transparent"}
-        bg-gray-100
+        ${isBoxInput ? "bg-gray-200" : "bg-gray-100"}
         focus:border-gray-500 focus:bg-white focus:ring-0
         dark:bg-gray-700
         ${isBoxInput ? "" : "dark:text-gray-300"}
+        ${
+          isBoxInput
+            ? ""
+            : "focus:ring-1 focus:ring-offset-2 focus:ring-gray-500"
+        }
         dark:focus:bg-gray-800
 `),
         className
