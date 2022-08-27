@@ -71,6 +71,7 @@ export type ButtonProps = {
 
 export const Button = ({
   variant = "default",
+  type = "button",
   className: inputtedClassName,
   children,
   ...props
@@ -83,7 +84,7 @@ export const Button = ({
     cx(baseStyles, getVariantClassName(variant), inputtedClassName)
   );
   return (
-    <button className={className} {...props}>
+    <button type={type} className={className} {...props}>
       <span className="absolute w-0 h-0 transition-all duration-300 ease-out bg-white rounded-full group-hover:w-full group-hover:h-full top-0 left-0 opacity-10"></span>
       {children}
     </button>
