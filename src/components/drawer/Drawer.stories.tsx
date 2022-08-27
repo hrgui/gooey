@@ -15,7 +15,7 @@ const Demo: Story = (props) => {
           Toggle Drawer State
         </Button>
       </div>
-      <Drawer className="text-white" isOpen={drawerOpen} {...props} />
+      <Drawer className="dark:text-white p-4" isOpen={drawerOpen} {...props} />
       {drawerOpen && <Overlay />}
     </>
   );
