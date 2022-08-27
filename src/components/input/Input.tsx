@@ -7,7 +7,7 @@ type Props = {} & React.DetailedHTMLProps<
   HTMLInputElement
 >;
 
-export const Input = ({ className, type, ...props }: Props) => {
+export const Input = ({ className, type = "text", ...props }: Props) => {
   const isBoxInput = type === "checkbox" || type === "radio";
   return (
     <input
