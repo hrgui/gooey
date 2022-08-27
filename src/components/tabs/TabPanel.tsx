@@ -1,17 +1,31 @@
 import React from "react";
+import { twMerge } from "tailwind-merge";
 
-interface Props {
+type Props = {
   value?: string | number;
   index?: string | number;
   children?: React.ReactNode;
-}
+} & React.DetailedHTMLProps<
+  React.HTMLAttributes<HTMLDivElement>,
+  HTMLDivElement
+>;
 
-export function TabPanel({ value, index, children }: Props) {
+export function TabPanel({
+  value,
+  index,
+  children,
+  className,
+  ...props
+}: Props) {
   if (value !== index) {
     return null;
   }
 
-  return <div className="p-[16px]">{children}</div>;
+  return (
+    <div className={twMerge(`p-[16px]`, className)} {...props}>
+      {children}
+    </div>
+  );
 }
 
 export default TabPanel;
