@@ -1,29 +1,29 @@
 import React from "react";
 import { twMerge } from "tailwind-merge";
+import ctl from "@netlify/classnames-template-literals";
 
 type Props = {} & React.DetailedHTMLProps<
   React.InputHTMLAttributes<HTMLInputElement>,
   HTMLInputElement
 >;
 
-export const Input = ({ className, ...props }: Props) => {
+export const Input = ({ className, type, ...props }: Props) => {
+  const isBoxInput = type === "checkbox" || type === "radio";
   return (
     <input
+      type={type}
       className={twMerge(
-        `
+        ctl(`
         mt-1
         block
-        w-full
         rounded-md
+        ${isBoxInput ? "border-gray-300" : "border-transparent"}
         bg-gray-100
-        border-transparent
         focus:border-gray-500 focus:bg-white focus:ring-0
-
         dark:bg-gray-700
-        dark:text-gray-300
+        ${isBoxInput ? "" : "dark:text-gray-300"}
         dark:focus:bg-gray-800
-
-`,
+`),
         className
       )}
       {...props}
