@@ -15,7 +15,7 @@ const Demo: Story = (props) => {
           Toggle Modal State
         </Button>
       </div>
-      <Modal className="text-white" isOpen={modalOpen} {...props} />
+      <Modal className="dark:text-white" isOpen={modalOpen} {...props} />
       {modalOpen && <Overlay />}
     </>
   );
