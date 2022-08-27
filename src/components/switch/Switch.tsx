@@ -47,7 +47,7 @@ export const Switch = ({
   const checkbox = (
     <input
       data-testid={`switch-checkbox-${props.name || props.id}`}
-      className="absolute opacity-0 h-full top-0 m-0 p-0 cursor-[inherit] w-[300%] left-[-100%] z-[1] sr-only"
+      className="absolute opacity-0 h-full top-0 m-0 p-0 cursor-[inherit] w-[300%] left-[-100%] z-[1]"
       checked={internalChecked}
       onChange={(e) => {
         setInternalChecked(e.target.checked);
