@@ -19,7 +19,7 @@ export const Default: Story = (args) => {
   };
 
   return (
-    <>
+    <div className="dark:text-white">
       <Tabs value={value} onChange={handleChange}>
         <Tab label="Item One" />
         <Tab label="Item Two" />
@@ -34,7 +34,7 @@ export const Default: Story = (args) => {
       <TabPanel value={2} index={value}>
         This is tab 3
       </TabPanel>
-    </>
+    </div>
   );
 };
 
