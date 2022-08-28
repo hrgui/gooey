@@ -41,7 +41,7 @@ const ToastProvider = ({ children }: Props) => {
 
   return (
     <ToastContext.Provider value={{ addToast }}>
-      <ToastsList toasts={_toasts} />
+      <ToastsList onRemoveToast={handleRemoveToast} toasts={_toasts} />
       {children}
     </ToastContext.Provider>
   );

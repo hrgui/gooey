@@ -4,13 +4,18 @@ import { ToastType } from "./ToastProvider";
 
 type Props = {
   toasts: ToastType[];
+  onRemoveToast: (id: number) => void;
 };
 
-const ToastsList = ({ toasts }: Props) => {
+const ToastsList = ({ toasts, onRemoveToast }: Props) => {
   return (
     <div className="absolute bottom-5 flex gap-3 flex-col-reverse">
       {toasts.map((toast) => (
-        <Toast key={toast.id} message={toast.message} />
+        <Toast
+          onRequestClose={() => onRemoveToast(toast.id)}
+          key={toast.id}
+          message={toast.message}
+        />
       ))}
     </div>
   );
