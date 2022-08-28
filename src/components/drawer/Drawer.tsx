@@ -1,7 +1,7 @@
 import classNames from "classnames";
 import { twMerge } from "tailwind-merge";
 
-export type Props = {
+export type DrawerProps = {
   isOpen?: boolean;
 } & React.DetailedHTMLProps<React.HTMLAttributes<HTMLElement>, HTMLElement>;
 
@@ -10,7 +10,7 @@ export const Drawer = ({
   children,
   className,
   ...props
-}: Props) => {
+}: DrawerProps) => {
   return (
     <aside
       aria-hidden={!isOpen}

@@ -1,7 +1,7 @@
 import classNames from "classnames";
 import { twMerge } from "tailwind-merge";
 
-export type Props = {
+export type ModalProps = {
   isOpen?: boolean;
 } & React.DetailedHTMLProps<
   React.HTMLAttributes<HTMLDivElement>,
@@ -13,7 +13,7 @@ export const Modal = ({
   children,
   className,
   ...props
-}: Props) => {
+}: ModalProps) => {
   if (!isOpen) {
     return null;
   }
