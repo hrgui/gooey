@@ -6,7 +6,7 @@ type Props = {} & React.DetailedHTMLProps<
   HTMLDivElement
 >;
 
-const ButtonGroup = ({ className, ...props }: Props) => {
+export const ButtonGroup = ({ className, ...props }: Props) => {
   return (
     <div
       className={twMerge(`inline-flex rounded-md shadow-sm`, className)}
