@@ -9,11 +9,11 @@ type Props = {} & React.DetailedHTMLProps<
 
 export const Input = ({ className, type = "text", ...props }: Props) => {
   const isBoxInput = type === "checkbox" || type === "radio";
-  return (
-    <input
-      type={type}
-      className={twMerge(
-        ctl(`
+
+  function getClassName(inputType: typeof type) {
+    switch (inputType) {
+      default:
+        return ctl(`
         mt-1
         ${isBoxInput ? "" : "block"}
         ${isBoxInput ? "rounded" : "rounded-md"}
@@ -27,10 +27,22 @@ export const Input = ({ className, type = "text", ...props }: Props) => {
             ? ""
             : "focus:ring-1 focus:ring-offset-2 focus:ring-gray-500"
         }
-        dark:focus:bg-gray-800
-`),
-        className
-      )}
+        dark:focus:bg-gray-800`);
+      case "range":
+        return ctl(`w-full 
+        h-2 
+        bg-gray-200 
+        rounded-lg 
+        appearance-none 
+        cursor-pointer 
+        dark:bg-gray-700`);
+    }
+  }
+
+  return (
+    <input
+      type={type}
+      className={twMerge(getClassName(type), className)}
       {...props}
     />
   );

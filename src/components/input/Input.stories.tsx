@@ -80,4 +80,9 @@ RadioInput.args = {
   type: "radio",
 };
 
+export const Range = Demo.bind({});
+Range.args = {
+  type: "range",
+};
+
 export default meta;
