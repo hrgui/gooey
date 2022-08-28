@@ -76,6 +76,7 @@ export const Button = ({
     px-5 
     py-2.5 
     focus:outline-none
+    duration-300
     transition-all
     relative
     group
@@ -92,7 +93,6 @@ export const Button = ({
   );
   return (
     <button type={type} className={className} {...props}>
-      <span className="absolute w-0 h-0 transition-all duration-300 ease-out bg-white rounded-none group-hover:w-full group-hover:h-full top-0 left-0 opacity-10"></span>
       {children}
     </button>
   );
