@@ -8,7 +8,7 @@ Harman's UI library made with React + TailwindCSS.
 
 ```sh
 yarn # required for installation
-yarn dev # starts up storybook
+yarn storybook # starts up storybook
 yarn build # builds
 ```
 
