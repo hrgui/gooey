@@ -1,7 +1,8 @@
 import React, { useEffect, useRef } from "react";
 import { clamp, round } from "~/utils";
+import { useStateCallback } from "~/utils/useStateCallback";
 
-type Props = {
+export type ScrubberProps = {
   value?: number;
   bufferValue?: number;
   max?: number;
@@ -17,11 +18,14 @@ const Scrubber = ({
   value = 0,
   bufferValue = 0,
   onChange = () => {},
-}: Props) => {
+}: ScrubberProps) => {
   const min = 0;
   const progressValuePercent = toPercentString(value, max);
   const bufferValuePercent = toPercentString(bufferValue, max);
   const barRef = useRef<HTMLDivElement>(null);
+  const [scrubberState, setScrubberState] = useStateCallback({
+    seeking: false,
+  });
 
   const getPositionFromCursor = ({
     mouseX,
@@ -33,16 +37,24 @@ const Scrubber = ({
       return 0;
     }
     const { left, width } = barDomNode.getBoundingClientRect();
+
+    if (width === 0) {
+      // otherwise from this point on we get NaN if there's no width
+      // assume that there is no point in putting a value
+      return 0;
+    }
+
     const cursor = typeof touchX === "number" ? touchX : mouseX || 0;
     // want to get value within range [left, left + width], but not any other value outside
     const clampedPositionValue = clamp(cursor, left, left + width);
-    // needs to correspond to the width
     const decimal = round((clampedPositionValue - left) / width);
     return round((max - min) * decimal) + min;
   };
 
   const handleMouseDown = (e: React.MouseEvent<HTMLDivElement>) => {
-    onChange(getPositionFromCursor({ mouseX: e.pageX }));
+    setScrubberState({ seeking: true }, () => {
+      onChange(getPositionFromCursor({ mouseX: e.pageX || e.clientX }));
+    });
   };
 
   const handleTouchStart = (e: React.TouchEvent<HTMLDivElement>) => {
@@ -50,10 +62,33 @@ const Scrubber = ({
     onChange(getPositionFromCursor({ touchX: touch.pageX }));
   };
 
-  const handleMouseMove = () => {};
-  const handleMouseUp = () => {};
-  const handleTouchMove = () => {};
-  const handleTouchEnd = () => {};
+  /**
+   * @param e
+   */
+  const handleMouseMove = (e: MouseEvent) => {
+    if (scrubberState.seeking) {
+      onChange(getPositionFromCursor({ mouseX: e.pageX }));
+    }
+  };
+
+  /**
+   * Need to end the seeking state
+   */
+  const handleMouseUp = () => {
+    if (scrubberState.seeking) {
+      setScrubberState({ seeking: false });
+    }
+  };
+
+  // TODO
+  const handleTouchMove = (e: TouchEvent) => {};
+
+  // TODO
+  const handleTouchEnd = (e: TouchEvent) => {
+    if (scrubberState.seeking) {
+      setScrubberState({ seeking: false });
+    }
+  };
 
   useEffect(() => {
     window.addEventListener("mousemove", handleMouseMove);
@@ -67,12 +102,13 @@ const Scrubber = ({
       window.removeEventListener("touchmove", handleTouchMove);
       window.removeEventListener("touchend", handleTouchEnd);
     };
-  }, []);
+  }, [scrubberState]);
 
   return (
     <div
+      data-testid="scrubber"
       ref={barRef}
-      className="relative h-1 bg-gray-500/50 w-full"
+      className="group relative h-1 bg-gray-500/50 w-full"
       onMouseDown={handleMouseDown}
       onTouchStart={handleTouchStart}
       onTouchEnd={(e) => e.preventDefault()}
@@ -89,6 +125,10 @@ const Scrubber = ({
       >
         <div className="sr-only">{bufferValuePercent}</div>
       </div>
+      <div
+        className="absolute group-hover:w-3 group-hover:h-3 rounded-full top-[50%] translate-y-[-50%] translate-x-[-50%] bg-blue-500"
+        style={{ left: progressValuePercent }}
+      ></div>
     </div>
   );
 };

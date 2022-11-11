@@ -1,20 +1,18 @@
 import React, { useState } from "react";
 import { StoryFn, Meta } from "@storybook/react";
-import Scrubber from "./Scrubber";
+import Scrubber, { ScrubberProps } from "./Scrubber";
 const meta: Meta = { title: "Scrubber", component: Scrubber };
 
 const Demo: StoryFn = ({ value, ...props }) => {
   const [_value, setInternalValue] = useState(value);
 
+  const handleChange: ScrubberProps["onChange"] = (newValue) => {
+    return setInternalValue(newValue);
+  };
+
   // TODO: change in value
 
-  return (
-    <Scrubber
-      value={_value}
-      onChange={(newValue) => setInternalValue(newValue)}
-      {...props}
-    />
-  );
+  return <Scrubber value={_value} {...props} onChange={handleChange} />;
 };
 
 export const Default = Demo.bind({});

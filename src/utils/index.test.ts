@@ -12,9 +12,17 @@ describe("clamp", () => {
   it("should return highest number since its outside the higher range", () => {
     expect(clamp(7, 2, 5)).toEqual(5);
   });
+
+  it("should return highest number since its outside the higher range", () => {
+    expect(clamp(7, 0, 0)).toEqual(0);
+  });
 });
 
 describe("round", () => {
+  it("should go down and accept 0", () => {
+    expect(round(0)).toEqual(0);
+  });
+
   it("should go up (default)", () => {
     expect(round(3.56234236)).toEqual(3.5623424);
   });
