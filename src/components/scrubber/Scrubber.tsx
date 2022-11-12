@@ -1,4 +1,5 @@
-import React, { useEffect, useRef } from "react";
+import classNames from "classnames";
+import React, { useEffect, useRef, useState } from "react";
 import { clamp, round } from "~/utils";
 import { useStateCallback } from "~/utils/useStateCallback";
 
@@ -23,6 +24,7 @@ const Scrubber = ({
   const progressValuePercent = toPercentString(value, max);
   const bufferValuePercent = toPercentString(bufferValue, max);
   const barRef = useRef<HTMLDivElement>(null);
+  const [isHovering, setIsHovering] = useState(false);
   const [scrubberState, setScrubberState] = useStateCallback({
     seeking: false,
   });
@@ -108,9 +110,11 @@ const Scrubber = ({
     <div
       data-testid="scrubber"
       ref={barRef}
-      className="group relative h-1 bg-gray-500/50 w-full"
+      className="relative h-1 bg-gray-500/50 w-full"
       onMouseDown={handleMouseDown}
       onTouchStart={handleTouchStart}
+      onMouseOver={() => setIsHovering(true)}
+      onMouseLeave={() => setIsHovering(false)}
       onTouchEnd={(e) => e.preventDefault()}
     >
       <div
@@ -126,7 +130,10 @@ const Scrubber = ({
         <div className="sr-only">{bufferValuePercent}</div>
       </div>
       <div
-        className="absolute group-hover:w-3 group-hover:h-3 rounded-full top-[50%] translate-y-[-50%] translate-x-[-50%] bg-blue-500"
+        className={classNames(
+          `w-3 h-3 opacity-0 transition-opacity absolute rounded-full top-[50%] translate-y-[-50%] translate-x-[-50%] bg-blue-500`,
+          { [`opacity-100`]: isHovering || scrubberState.seeking }
+        )}
         style={{ left: progressValuePercent }}
       ></div>
     </div>
