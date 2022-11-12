@@ -14,6 +14,11 @@ function toPercentString(value: number, max: number) {
   return ((value / max) * 100).toFixed(5) + "%";
 }
 
+interface ScrubberState {
+  seeking?: boolean;
+  touchId?: number | null;
+}
+
 const Scrubber = ({
   max = 1,
   value = 0,
@@ -25,8 +30,9 @@ const Scrubber = ({
   const bufferValuePercent = toPercentString(bufferValue, max);
   const barRef = useRef<HTMLDivElement>(null);
   const [isHovering, setIsHovering] = useState(false);
-  const [scrubberState, setScrubberState] = useStateCallback({
+  const [scrubberState, setScrubberState] = useStateCallback<ScrubberState>({
     seeking: false,
+    touchId: null,
   });
 
   const getPositionFromCursor = ({
@@ -53,18 +59,23 @@ const Scrubber = ({
     return round((max - min) * decimal) + min;
   };
 
+  /**
+   * User held down the mouse on the scrubber.
+   * If the user moved the mouse after, it goes to the handle mouse move event, which
+   * allows continued seeking - which is why we set seeking to true here.
+   * If the user stopped, it goes directly to move up event.
+   * @param e
+   */
   const handleMouseDown = (e: React.MouseEvent<HTMLDivElement>) => {
     setScrubberState({ seeking: true }, () => {
       onChange(getPositionFromCursor({ mouseX: e.pageX || e.clientX }));
     });
   };
 
-  const handleTouchStart = (e: React.TouchEvent<HTMLDivElement>) => {
-    const touch = e.changedTouches[0];
-    onChange(getPositionFromCursor({ touchX: touch.pageX }));
-  };
-
   /**
+   * User moved the mouse on the scrubber.
+   * We only allow this if there was a "down" event prior.
+   * We call this "seeking"
    * @param e
    */
   const handleMouseMove = (e: MouseEvent) => {
@@ -74,7 +85,7 @@ const Scrubber = ({
   };
 
   /**
-   * Need to end the seeking state
+   * When the user has let go of the mouse, we're no longer seeking
    */
   const handleMouseUp = () => {
     if (scrubberState.seeking) {
@@ -82,13 +93,53 @@ const Scrubber = ({
     }
   };
 
-  // TODO
-  const handleTouchMove = (e: TouchEvent) => {};
+  /**
+   * User touched the scrubber.
+   * Like the mouse, we set seeking to true, but we also set the touchIdentifier.
+   * If the touch was let go, it goes to touchEnd
+   * If the touch was held further, it goes to touch move.
+   * @param e
+   */
+  const handleTouchStart = (e: React.TouchEvent<HTMLDivElement>) => {
+    const touchPoint = e.changedTouches[0];
+    setScrubberState({ seeking: true, touchId: touchPoint.identifier }, () => {
+      onChange(getPositionFromCursor({ touchX: touchPoint.pageX }));
+    });
+  };
 
-  // TODO
-  const handleTouchEnd = (e: TouchEvent) => {
+  /**
+   * This is when the user touched the scrubber but is seeking - moving
+   * @param e
+   */
+  const handleTouchMove = (e: TouchEvent) => {
     if (scrubberState.seeking) {
-      setScrubberState({ seeking: false });
+      e.preventDefault();
+    }
+
+    const hasBeenTouched = Array.from(e.changedTouches).find(
+      (t) => t.identifier === scrubberState.touchId
+    );
+
+    if (hasBeenTouched && scrubberState.seeking) {
+      onChange(
+        getPositionFromCursor({
+          touchX: hasBeenTouched.pageX || hasBeenTouched.clientX,
+        })
+      );
+    }
+  };
+
+  /**
+   * This is when the user let go after touching the scrubber.
+   * @param e
+   */
+  const handleTouchEnd = (e: TouchEvent) => {
+    const hasBeenTouched = Array.from(e.changedTouches).find(
+      (t) => t.identifier === scrubberState.touchId
+    );
+
+    if (hasBeenTouched && scrubberState.seeking) {
+      setScrubberState({ seeking: false, touchId: null });
     }
   };
 
