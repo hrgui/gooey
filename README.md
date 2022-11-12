@@ -1,5 +1,14 @@
 # gooey
 
+## Status
+
+> **Warning**
+> This library is not well-maintained. It is not ready for production use. It is only meant for use in hrgui's projects.
+
+This library is a playground for testing and learning on how I create UI components from end to end. It is not ready or meant for production use. It isn't well-maintained. Would prefer using libraries from `credits due` instead.
+
+---
+
 Harman's UI library made with React + TailwindCSS.
 
 # Getting Started
@@ -11,12 +20,6 @@ yarn # required for installation
 yarn storybook # starts up storybook
 yarn build # builds
 ```
-
-# Status
-
-This is still considered not ready for production, nor ready for use.
-
-This is still serving as a playground on how I do tailwind and React.
 
 # Inspiration
 
