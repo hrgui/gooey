@@ -5,5 +5,8 @@ module.exports = {
     name: "@storybook/react-vite",
     options: {}
   },
-  "core": {}
+  "core": {},
+  docsPage: {
+    docs: "automatic"
+  }
 };
