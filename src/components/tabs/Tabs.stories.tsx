@@ -1,11 +1,9 @@
 import React, { useEffect } from "react";
-import { Story, Meta, ComponentMeta } from "@storybook/react-vite";
+import { StoryFn, Meta } from "@storybook/react-vite";
 import { Tabs, TabPanel, Tab } from "./index";
-const meta: Meta = { title: "Tabs", component: Tabs } as ComponentMeta<
-  typeof Tabs
->;
+const meta: Meta<typeof Tabs> = { title: "Tabs", component: Tabs };
 
-export const Default: Story = (args) => {
+export const Default: StoryFn<any> = (args: any) => {
   const [value, setValue] = React.useState<string | number>(+args.value || 0);
 
   useEffect(() => {

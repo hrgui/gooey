@@ -1,21 +1,21 @@
-import { Story, Meta } from "@storybook/react-vite";
+import { StoryFn, Meta } from "@storybook/react-vite";
 import { Button } from "./Button";
 import ButtonGroup from "./ButtonGroup";
-const meta: Meta = { title: "Button", component: Button };
+const meta: Meta<typeof Button> = { title: "Button", component: Button };
 
-const Demo: Story = (props) => <Button {...props} />;
+const Demo: StoryFn<any> = (props: any) => <Button {...props} />;
 
 export const Default = Demo.bind({});
 Default.args = {
   children: "Hello World",
 };
 
-export const Group: Story = ({
+export const Group: StoryFn<any> = ({
   onOptionOneClick,
   onOptionTwoClick,
   onOptionThreeClick,
   ...props
-}) => (
+}: any) => (
   <ButtonGroup {...props}>
     <Button
       onClick={onOptionOneClick}

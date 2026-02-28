@@ -1,9 +1,12 @@
 import React from "react";
-import { Story, Meta } from "@storybook/react-vite";
+import { StoryFn, Meta } from "@storybook/react-vite";
 import ToastProvider from "./ToastProvider";
 import { useToasts } from "./useToasts";
 import Button from "../buttons/Button";
-const meta: Meta = { title: "ToastProvider", component: ToastProvider };
+const meta: Meta<typeof ToastProvider> = {
+  title: "ToastProvider",
+  component: ToastProvider,
+};
 
 function TestSuite() {
   const { addToast } = useToasts();
@@ -15,7 +18,7 @@ function TestSuite() {
   );
 }
 
-const Demo: Story = (props) => (
+const Demo: StoryFn<any> = (props: any) => (
   <ToastProvider>
     <TestSuite />
   </ToastProvider>

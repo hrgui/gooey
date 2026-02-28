@@ -1,8 +1,11 @@
-import { Story, Meta } from "@storybook/react-vite";
+import { StoryFn, Meta } from "@storybook/react-vite";
 import { Switch as SwitchComponent } from "./Switch";
-const meta: Meta = { title: "Input", component: SwitchComponent };
+const meta: Meta<typeof SwitchComponent> = {
+  title: "Input",
+  component: SwitchComponent,
+};
 
-const Demo: Story = (args) => <SwitchComponent {...args} />;
+const Demo: StoryFn<any> = (args: any) => <SwitchComponent {...args} />;
 
 export const Switch = Demo.bind({});
 Switch.args = {

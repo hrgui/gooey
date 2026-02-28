@@ -1,9 +1,9 @@
 import React from "react";
-import { Story, Meta } from "@storybook/react-vite";
+import { StoryFn, Meta } from "@storybook/react-vite";
 import { Input } from "./Input";
-const meta: Meta = { title: "Input", component: Input };
+const meta: Meta<typeof Input> = { title: "Input", component: Input };
 
-const Demo: Story = (props) => <Input {...props} />;
+const Demo: StoryFn<any> = (props: any) => <Input {...props} />;
 
 export const TextInput = Demo.bind({});
 TextInput.args = {

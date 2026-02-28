@@ -1,11 +1,11 @@
 import React, { useState } from "react";
-import { Story, Meta } from "@storybook/react-vite";
+import { StoryFn, Meta } from "@storybook/react-vite";
 import { Modal } from "./Modal";
 import { Button } from "../buttons";
 import Overlay from "../overlay/Overlay";
-const meta: Meta = { title: "Modal", component: Modal };
+const meta: Meta<typeof Modal> = { title: "Modal", component: Modal };
 
-const Demo: Story = (props) => {
+const Demo: StoryFn<any> = (props: any) => {
   const [modalOpen, setModalOpen] = useState(props.isOpen || false);
 
   return (

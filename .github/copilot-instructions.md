@@ -42,16 +42,15 @@ const className = twMerge(cx(baseStyles, getVariantClassName(variant)), inputted
 
 ## Developer workflows
 
-1. **Install**: `yarn` (uses yarn 1 in this repo). Sometimes `bun i` also works but
-   scripts expect `yarn`.
+1. **Install**: Use `bun` to install. Do not use npm or yarn.
 2. **Run locally**
    - Dependencies are installed with `bun install` (preferred). `yarn` or `npm` also work but may pull different versions of storybook.
-   - `yarn dev`/`bun run dev` for the component library via Vite (not strictly needed; UI exists only
+   - `bun run dev` for the component library via Vite (not strictly needed; UI exists only
      inside Storybook).
-   - `yarn storybook`/`bun run storybook` to boot Storybook at `http://localhost:6006`.
-3. **Build**: `yarn build` produces a Vite dist (never published) and runs TypeScript
-   checks. `yarn build-storybook` builds the static Storybook.
-4. **Tests**: `yarn test` for headless Vitest, `yarn test-ui` to open the interactive
+   - `bun run storybook` to boot Storybook at `http://localhost:6006`.
+3. **Build**: `bun run build` produces a Vite dist (never published) and runs TypeScript
+   checks. `bun run build-storybook` builds the static Storybook.
+4. **Tests**: `bun run test` for headless Vitest, `bun run test-ui` to open the interactive
    runner.
 5. **Adding a component**: mimic pattern in `src/components/buttons` or `input`; always
    include a story and a test and export from an `index` file.

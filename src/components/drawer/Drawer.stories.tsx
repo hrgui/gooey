@@ -1,11 +1,11 @@
 import React, { useState } from "react";
-import { Story, Meta } from "@storybook/react-vite";
+import { StoryFn, Meta } from "@storybook/react-vite";
 import { Drawer } from "./Drawer";
 import { Button } from "../buttons";
 import Overlay from "../overlay/Overlay";
-const meta: Meta = { title: "Drawer", component: Drawer };
+const meta: Meta<typeof Drawer> = { title: "Drawer", component: Drawer };
 
-const Demo: Story = (props) => {
+const Demo: StoryFn<any> = (props: any) => {
   const [drawerOpen, setDrawerOpen] = useState(false);
   const toggleDrawerOpen = () => setDrawerOpen(!drawerOpen);
 

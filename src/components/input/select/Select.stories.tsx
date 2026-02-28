@@ -1,9 +1,12 @@
 import React from "react";
-import { Story, Meta } from "@storybook/react-vite";
+import { StoryFn, Meta } from "@storybook/react-vite";
 import { Select as SelectInput } from "./Select";
-const meta: Meta = { title: "Input", component: SelectInput };
+const meta: Meta<typeof SelectInput> = {
+  title: "Input",
+  component: SelectInput,
+};
 
-export const Select: Story = (props) => (
+export const Select: StoryFn<any> = (props: any) => (
   <SelectInput {...props}>
     <option value="1">Option 1</option>
     <option value="2">Option 2</option>
@@ -12,7 +15,7 @@ export const Select: Story = (props) => (
 );
 Select.args = {};
 
-export const SelectMultiple: Story = (props) => (
+export const SelectMultiple: StoryFn<any> = (props: any) => (
   <SelectInput multiple {...props}>
     <option value="1">Option 1</option>
     <option value="2">Option 2</option>
