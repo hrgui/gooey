@@ -8,8 +8,8 @@ library — the README clearly warns about that. When in doubt, follow the exist
 ## Big picture
 
 - **Monorepo?** No. Single package under `src/` with React components, hooks and utils.
-- **Build tools**: Vite + TypeScript, output is not published anywhere. `yarn dev` starts
-  vite, `yarn build` runs `tsc && vite build`. Storybook is configured using
+- **Build tools**: Vite + TypeScript, output is not published anywhere. `bun run dev` starts
+  vite, `bun run build` runs `tsc && vite build`. Storybook is configured using
   `@storybook/react-vite` (see `package.json` scripts).
 - **Design**: every component lives in `src/components/<category>/`. Each folder usually
   contains:
@@ -42,9 +42,10 @@ const className = twMerge(cx(baseStyles, getVariantClassName(variant)), inputted
 
 ## Developer workflows
 
-1. **Install**: Use `bun` to install. Do not use npm or yarn.
+**IMPORTANT: Use `bun` exclusively for this project.** Do not use `npm` or `yarn`.
+
+1. **Install**: `bun install` (required; this is the only supported package manager).
 2. **Run locally**
-   - Dependencies are installed with `bun install` (preferred). `yarn` or `npm` also work but may pull different versions of storybook.
    - `bun run dev` for the component library via Vite (not strictly needed; UI exists only
      inside Storybook).
    - `bun run storybook` to boot Storybook at `http://localhost:6006`.
@@ -76,7 +77,8 @@ const className = twMerge(cx(baseStyles, getVariantClassName(variant)), inputted
 ## Integration points
 
 - No backend, no external APIs.
-- **Package manager**: bun is the canonical installer. The repo currently pins Storybook to `^7.0.0-beta.19` because newer releases could not be resolved by bun; feel free to upgrade if you switch to yarn/npm instead.
+- **Package manager**: bun is the exclusive package manager for this project. All dependencies
+  are pinned to versions that bun can resolve. Storybook 10.2.13 is used.
 - The only non‑React dependency is Tailwind CSS plus a few build tools (Storybook,
   Vitest, Babel). Most runtime logic lives inside components.
 - Storybook stories can be used as manual test cases and examples for new components.
