@@ -1,4 +1,4 @@
-import { Story, Meta } from "@storybook/react";
+import { Story, Meta } from "@storybook/react-vite";
 import { Button } from "./Button";
 import ButtonGroup from "./ButtonGroup";
 const meta: Meta = { title: "Button", component: Button };

@@ -1,5 +1,5 @@
 import React from "react";
-import { Story, Meta } from "@storybook/react";
+import { Story, Meta } from "@storybook/react-vite";
 import ToastProvider from "./ToastProvider";
 import { useToasts } from "./useToasts";
 import Button from "../buttons/Button";

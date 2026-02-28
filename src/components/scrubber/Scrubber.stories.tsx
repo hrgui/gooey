@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import { StoryFn, Meta } from "@storybook/react";
+import { StoryFn, Meta } from "@storybook/react-vite";
 import Scrubber, { ScrubberProps } from "./Scrubber";
 import { useKeyPress } from "~/hooks/useKeyPress";
 const meta: Meta = { title: "Scrubber", component: Scrubber };

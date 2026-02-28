@@ -45,9 +45,10 @@ const className = twMerge(cx(baseStyles, getVariantClassName(variant)), inputted
 1. **Install**: `yarn` (uses yarn 1 in this repo). Sometimes `bun i` also works but
    scripts expect `yarn`.
 2. **Run locally**
-   - `yarn dev` for the component library via Vite (not strictly needed; UI exists only
+   - Dependencies are installed with `bun install` (preferred). `yarn` or `npm` also work but may pull different versions of storybook.
+   - `yarn dev`/`bun run dev` for the component library via Vite (not strictly needed; UI exists only
      inside Storybook).
-   - `yarn storybook` to boot Storybook at `http://localhost:6006`.
+   - `yarn storybook`/`bun run storybook` to boot Storybook at `http://localhost:6006`.
 3. **Build**: `yarn build` produces a Vite dist (never published) and runs TypeScript
    checks. `yarn build-storybook` builds the static Storybook.
 4. **Tests**: `yarn test` for headless Vitest, `yarn test-ui` to open the interactive
@@ -76,6 +77,7 @@ const className = twMerge(cx(baseStyles, getVariantClassName(variant)), inputted
 ## Integration points
 
 - No backend, no external APIs.
+- **Package manager**: bun is the canonical installer. The repo currently pins Storybook to `^7.0.0-beta.19` because newer releases could not be resolved by bun; feel free to upgrade if you switch to yarn/npm instead.
 - The only non‑React dependency is Tailwind CSS plus a few build tools (Storybook,
   Vitest, Babel). Most runtime logic lives inside components.
 - Storybook stories can be used as manual test cases and examples for new components.

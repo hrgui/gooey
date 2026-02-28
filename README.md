@@ -16,9 +16,24 @@ Harman's UI library made with React + TailwindCSS.
 ## Commands
 
 ```sh
-yarn # required for installation
-yarn storybook # starts up storybook
-yarn build # builds
+# install dependencies (bun is preferred and fastest)
+bun install    # only needs bun to work; yarn/npm also supported if necessary
+
+# development helpers
+bun run storybook    # starts Storybook at http://localhost:6006
+# (equivalent to `storybook dev -p 6006`)
+
+bun run build        # compiles TS and bundles via Vite (`tsc && vite build`)
+
+# alternatives if you prefer npm/yarn
+# yarn
+#   yarn
+#   yarn storybook
+#   yarn build
+# npm
+#   npm install
+#   npm run storybook
+#   npm run build
 ```
 
 # Inspiration

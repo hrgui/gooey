@@ -1,5 +1,5 @@
 import React from "react";
-import { Story, Meta } from "@storybook/react";
+import { Story, Meta } from "@storybook/react-vite";
 import { Input } from "./Input";
 const meta: Meta = { title: "Input", component: Input };
 

@@ -1,5 +1,5 @@
 import React, { useEffect } from "react";
-import { Story, Meta, ComponentMeta } from "@storybook/react";
+import { Story, Meta, ComponentMeta } from "@storybook/react-vite";
 import { Tabs, TabPanel, Tab } from "./index";
 const meta: Meta = { title: "Tabs", component: Tabs } as ComponentMeta<
   typeof Tabs

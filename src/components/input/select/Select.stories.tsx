@@ -1,5 +1,5 @@
 import React from "react";
-import { Story, Meta } from "@storybook/react";
+import { Story, Meta } from "@storybook/react-vite";
 import { Select as SelectInput } from "./Select";
 const meta: Meta = { title: "Input", component: SelectInput };
 

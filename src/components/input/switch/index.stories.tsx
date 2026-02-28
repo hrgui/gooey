@@ -1,4 +1,4 @@
-import { Story, Meta } from "@storybook/react";
+import { Story, Meta } from "@storybook/react-vite";
 import { Switch as SwitchComponent } from "./Switch";
 const meta: Meta = { title: "Input", component: SwitchComponent };
 

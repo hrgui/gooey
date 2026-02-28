@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import { Story, Meta } from "@storybook/react";
+import { Story, Meta } from "@storybook/react-vite";
 import { Drawer } from "./Drawer";
 import { Button } from "../buttons";
 import Overlay from "../overlay/Overlay";
