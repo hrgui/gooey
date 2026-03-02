@@ -17,9 +17,8 @@ library — the README clearly warns about that. When in doubt, follow the exist
   - `Component.test.tsx` (Vitest/Testing Library smoke tests)
   - `Component.stories.tsx` (Storybook stories)
   - `index.ts`/`index.tsx` re‑exporting the default component.
-- **Styling**: Tailwind CSS only. The codebase uses `ctl` (`@netlify/classnames-template-literals`)
-  to build multiline class strings, and `tailwind-merge` (`twMerge`) when combining
-  classes from props. Variants are often implemented as maps of `ctl` templates.
+- **Styling**: UnoCSS with preset-uno and preset-forms. The codebase uses `ctl` (`@netlify/classnames-template-literals`)
+  to build multiline class strings when combining utilities. Variants are often implemented as maps of `ctl` templates.
 
 ```
 // example from Button.tsx
@@ -55,8 +54,8 @@ const className = twMerge(cx(baseStyles, getVariantClassName(variant)), inputted
    runner.
 5. **Adding a component**: mimic pattern in `src/components/buttons` or `input`; always
    include a story and a test and export from an `index` file.
-6. **Styling changes**: modify `tailwind.config.cjs` if you need new utilities.
-   Dark mode is enabled by `class` strategy; add `dark:` variants accordingly.
+6. **Styling changes**: modify `uno.config.ts` if you need new utilities or custom rules.
+   Dark mode is enabled by default; use `dark:` variants accordingly.
 
 > **Note:** The library is intentionally rough. Don't refactor the entire tree for
 > consistency unless you're prepared to maintain it; simple incremental changes are fine.

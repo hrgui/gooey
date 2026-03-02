@@ -1,3 +1,4 @@
+import "virtual:uno.css";
 import "../src/index.css";
 
 export const parameters = {
